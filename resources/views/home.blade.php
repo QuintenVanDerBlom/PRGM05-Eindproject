@@ -1,8 +1,10 @@
 <x-layout title="Solice">
 
-    @foreach($trails as $trail)
-        {{ $trail->name }}
-    @endforeach
+{{--    @php--}}
+{{--        $userRole = auth()->user()->role; // Get the logged-in user's role number--}}
+{{--    dd($userRole)--}}
+{{--    @endphp--}}
+
 
     @include('partials.navigation')
         <section class="h-screen relative bg-cover bg-center bg-no-repeat bg-[url('https://cdn.suwalls.com/wallpapers/nature/path-in-the-forest-15174-1920x1080.jpg')]">

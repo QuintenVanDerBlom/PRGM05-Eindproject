@@ -7,15 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class HikingTrail extends Model
 {
-    use HasFactory;
-
-    public function index() {
-
-    }
-
+    // Define the fillable fields
+    protected $fillable = ['name', 'location', 'type_trail', 'difficulty'];
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_hiking_trail', 'hiking_trail_id', 'category_id');
     }
 }

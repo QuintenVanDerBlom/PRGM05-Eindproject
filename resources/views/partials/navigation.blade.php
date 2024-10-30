@@ -2,7 +2,7 @@
     <x-navlink href="{{route('home')}}" :active="request()->is('home')"></x-navlink> <!-- Gebruik dit vanaf nu -->
 </nav>
 <div class="min-h-full">
-    <nav class="bg-green-900">
+    <nav class="bg-black">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <div class="flex items-center">
@@ -16,6 +16,7 @@
                             <x-nav-link href="{{route('trails')}}" :active="request()->is('trails')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Trails</x-nav-link>
                             <x-nav-link href="{{route('about-us')}}" :active="request()->is('about-us')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About Us</x-nav-link>
                             <x-nav-link href="{{route('contact-us')}}" :active="request()->is('contact-us')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</x-nav-link>
+                            <x-nav-link href="{{route('trails.show')}}" :active="request()->is('trails.show')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</x-nav-link>
                         </div>
                     </div>
                 </div>

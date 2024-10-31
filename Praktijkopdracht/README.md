@@ -61,4 +61,37 @@ Ik heb ook wat dingetjes geprobeerd met Tailwind CSS, aangezien dat het grootse 
 Styling komt later, het gaat nu puur om functionaliteit.
 
 ##17 Oktober Donderdag
+Tijdens deze dag heb ik een werkende CRUD gemaakt in laravel. 
+![image](https://github.com/user-attachments/assets/d1c8ba2d-bc55-4dc6-bbcd-a62a8d4d7da1)
+Dit is de show pagina, waar alle entries staan
 
+Hier is de create, edit en delete in volgorde.
+![image](https://github.com/user-attachments/assets/8d4a7edf-f7aa-4fba-a376-bd82d237344e)
+![image](https://github.com/user-attachments/assets/d0b039cd-d0c9-4f77-83b4-f6dcb548793a)
+![image](https://github.com/user-attachments/assets/25df4c6f-5922-48be-b089-47ab16e669d3)
+
+De delete verwijderd momenteel zonder pop-up.
+
+En een screenshot van de backend:
+![image](https://github.com/user-attachments/assets/7e92964b-6623-45b0-af78-a6a171d8e3b1)
+
+##22 Oktober Maandag
+
+Tijdens deze les heb ik de les stof grotendeels gevolgd en de tussentabel van mijn hikingtrails gemaakt.
+![image](https://github.com/user-attachments/assets/169178a7-1d55-4d29-b1d1-fa80a8ba70e1)
+
+Dit was prima te doen.
+![image](https://github.com/user-attachments/assets/028fe3c0-230b-42b6-9639-8c321dd82efe)
+
+Dit is ook het enige wat ik deze les heb kunnen doen.
+
+![image](https://github.com/user-attachments/assets/e0c05f12-8788-4d76-8b58-3a16eddbb743)
+
+##Dinsdag 23 Oktober
+Ziek
+
+##Donderdag 25 Oktober
+Ziek
+
+##Woensdag 30 Oktober
+Ik heb de opdracht van mijn laptop naar mijn PC overgebracht en ben van plan de aankomende dagen het project af te ronden.

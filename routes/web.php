@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HikingTrailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,15 @@ Route::middleware('auth')->group(function () {
     Route::get('trails/{hikingTrail}/edit', [HikingTrailController::class, 'edit'])->name('trails.edit');
     Route::put('trails/{hikingTrail}', [HikingTrailController::class, 'update'])->name('trails.update');
     Route::delete('/trails/{id}', [HikingTrailController::class, 'destroy'])->name('trails.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/categories/show', [CategoryController::class, 'index'])->name('categories.show');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 

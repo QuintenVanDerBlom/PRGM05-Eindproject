@@ -35,10 +35,7 @@ class HikingTrailController extends Controller
             'categories' => 'required|array', // Ensure category is selected
         ]);
 
-        // Create the hiking trail
         $trail = HikingTrail::create($validated);
-
-        // Attach the selected categories to the hiking trail
         $trail->categories()->attach($request->categories);
 
         // Redirect to the index page or show a success message

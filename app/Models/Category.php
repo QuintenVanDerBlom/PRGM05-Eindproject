@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
 
-
+    protected $fillable = ['name'];
     public function hikingTrails()
     {
         return $this->belongsToMany(HikingTrail::class, 'category_hiking_trail', 'category_id', 'hiking_trail_id');

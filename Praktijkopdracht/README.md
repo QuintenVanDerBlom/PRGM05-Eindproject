@@ -95,3 +95,22 @@ Ziek
 
 ##Woensdag 30 Oktober
 Ik heb de opdracht van mijn laptop naar mijn PC overgebracht en ben van plan de aankomende dagen het project af te ronden.
+
+## 31 Oktober Donderdag
+Ik ben verder gegaan aan de opdracht en heb vandaag de CRUD gemaakt voor mijn categories en en door middel van Middleware authentication toegepast op de dashboards.
+
+![image](https://github.com/user-attachments/assets/2188003b-30e9-4b94-ba81-7e0e00873013)
+Dit is de dashboard, hieruit kan je dus de trails en categories berijken.
+
+De category crud is bijna een 1 op 1 kopie van de trails.
+![image](https://github.com/user-attachments/assets/652d1250-be5c-4193-ad86-84f959101395)
+
+En hieruit het resultaat:
+
+![image](https://github.com/user-attachments/assets/3a64e571-9982-43b0-95e3-a3003d1b66ef)
+
+En als laatste de routes inclusief middleware:
+
+![image](https://github.com/user-attachments/assets/f03102df-9c9e-4dc3-b919-6d2336c6a781)
+
+Dit was mijn vooruitgang op deze dag.

@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index() {
-        $categories = Category::with('hikingtrails')->get();
+    public function index(Request $request) {
+        $query = Category::with('hikingtrails');
 
-        return view('admin.categories.show', ['categories' => $categories]);
+        if ($request->has('search') && $request->search) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $categories = $query->get();
+
+        return view('admin.categories.show', [
+            'categories' => $categories
+        ]);
     }
+
 
     public function create()
     {

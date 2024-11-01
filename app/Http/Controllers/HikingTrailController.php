@@ -9,10 +9,31 @@ use Illuminate\Http\Request;
 
 class HikingTrailController extends Controller
 {
-    public function index() {
-        $trails = HikingTrail::with('categories')->get();
+    public function index(Request $request) {
+        $query = HikingTrail::with('categories');
 
-        return view('admin.trails.show', ['trails' => $trails]);
+        // Search functionality
+        if ($request->has('search') && $request->search) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('location', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter by category
+        if ($request->has('category') && $request->category) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('categories.id', $request->category); // Specificeer de tabel anders error.
+            });
+        }
+
+        $trails = $query->get();
+        $categories = Category::all(); // Voor de dropdown search
+
+        return view('admin.trails.show', [
+            'trails' => $trails,
+            'categories' => $categories
+        ]);
     }
 
     public function create()
@@ -26,56 +47,57 @@ class HikingTrailController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'difficulty' => 'required|integer|min:1|max:5',
             'type_trail' => 'required|string|max:255',
-            'categories' => 'required|array', // Ensure category is selected
+            'categories' => 'required|array',
         ]);
+
+        $validated['created_by'] = auth()->id(); // Save creator's ID
 
         $trail = HikingTrail::create($validated);
         $trail->categories()->attach($request->categories);
 
-        // Redirect to the index page or show a success message
         return redirect()->route('trails.show')->with('success', 'Hiking trail created successfully!');
     }
+
 
     // Show the form to edit the specified hiking trail
     public function edit(HikingTrail $hikingTrail)
     {
-        // Fetch all categories
-        $categories = Category::all();
+        // Check if the logged-in user is the creator
+        if (auth()->id() !== $hikingTrail->created_by) {
+            abort(403, 'Unauthorized action.');
+        }
 
-        // Fetch the current categories associated with this hiking trail
+        $categories = Category::all();
         $selectedCategories = $hikingTrail->categories->pluck('id')->toArray();
 
-        // Pass the trail, all categories, and the selected categories to the view
         return view('admin.trails.edit', compact('hikingTrail', 'categories', 'selectedCategories'));
     }
 
-    // Update the specified hiking trail in the database
     public function update(Request $request, HikingTrail $hikingTrail)
     {
-        // Validate the input
+        if (auth()->id() !== $hikingTrail->created_by) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'difficulty' => 'required|integer|min:1|max:5',
             'type_trail' => 'required|string|max:255',
-            'categories' => 'required|array', // Ensure categories are provided
+            'categories' => 'required|array',
         ]);
 
-        // Update the hiking trail
         $hikingTrail->update($validated);
-
-        // Sync the selected categories (removes any existing ones and attaches the new ones)
         $hikingTrail->categories()->sync($request->categories);
 
-        // Redirect back or show success message
-        return redirect()->route('hiking_trails.index')->with('success', 'Hiking trail updated successfully!');
+        return redirect()->route('trails.show')->with('success', 'Hiking trail updated successfully!');
     }
+
 
     public function destroy($id)
     {

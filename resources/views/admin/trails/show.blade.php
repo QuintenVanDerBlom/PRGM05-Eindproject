@@ -1,7 +1,41 @@
 <x-layout title="Solice">
 @include('partials.navigation')
     <section class="m-2">
-        <a href="{{ route('trails.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Create New Entry</a>
+        <form action="{{ route('trails.show') }}" method="GET" class="flex gap-2">
+            <!-- Search Input -->
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Search trails..."
+                class="text-sm px-4 py-2 border rounded-lg focus:outline-none"
+            />
+
+            <!-- Category Dropdown -->
+            <select
+                name="category"
+                class="text-sm px-4 py-2 border rounded-lg focus:outline-none"
+                onchange="this.form.submit()"
+            >
+                <option value="">All Categories</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ request('category') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <!-- Search Button -->
+            <button
+                type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+                Search
+            </button>
+
+            <!-- Create Button -->
+            <a href="{{ route('trails.create') }}" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Create New Entry</a>
+        </form>
     </section>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -47,3 +81,9 @@
 
     @include('partials.footer')
 </x-layout>
+
+<script>
+    document.querySelector('select[name="category"]').addEventListener('change', function() {
+        this.form.submit();
+    });
+</script>

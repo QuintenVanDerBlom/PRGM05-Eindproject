@@ -151,3 +151,29 @@ Dit is als user.
 En de code.
 
 Dat was al weer alles voor vandaag, morgen ga ik verder met de laatste puntjes zodat ik zondag gerust de puntjes op de i kan zetten.
+
+## 2 November Zaterdag
+
+Ik ben verder gegaan met de vereiste criteria. Ik heb een knop gemaakt die categorie kan disabelen en alle trails die eraan zitten ook uit zet.
+![image](https://github.com/user-attachments/assets/61f6341b-ac8f-4853-9b48-d9744f0860a4)
+![image](https://github.com/user-attachments/assets/bc2dc36a-2c23-4f1b-a2a9-05417b23e8de)
+
+Daarnaast heb ik een gif toegevoegd op mijn about en contact page:
+
+![image](https://github.com/user-attachments/assets/9ad7ee90-7909-4d50-84ba-6989a20a801d)
+![image](https://github.com/user-attachments/assets/63e3f178-4258-4a73-8397-953c289ff4a8)
+
+En heb ik ook nog de trails toegevoegd op de hoofd pagina:
+![image](https://github.com/user-attachments/assets/901d85f0-97f9-43b7-8ec0-9ffaaf009169)
+
+
+En de code in de controllers:
+
+![image](https://github.com/user-attachments/assets/f0d075cb-592b-4fbb-8194-c86ecddfe927)
+
+![image](https://github.com/user-attachments/assets/f2b2e424-7c74-4d55-a7bb-1a0d90e0a764)
+
+
+![image](https://github.com/user-attachments/assets/859fefde-716f-402c-b8c4-601828e55dcd)
+
+Dat was em al weer. Ik rond morgen de rest af en lever het project in.

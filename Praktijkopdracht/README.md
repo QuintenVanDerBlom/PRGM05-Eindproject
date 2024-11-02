@@ -114,3 +114,40 @@ En als laatste de routes inclusief middleware:
 ![image](https://github.com/user-attachments/assets/f03102df-9c9e-4dc3-b919-6d2336c6a781)
 
 Dit was mijn vooruitgang op deze dag.
+
+
+## 1 November Vrijdag
+
+Voor vandaag ben ik verder gegaan aan de vereiste criteria en heb ik een zoek functie gemaakt binnen mijn hiking trails en categories.
+![image](https://github.com/user-attachments/assets/5d6812eb-28c8-4a6d-97f3-22da510fa30d)
+
+En nog wat html in blade:
+
+![image](https://github.com/user-attachments/assets/48ef9704-8d2d-4cc9-84eb-178a98885765)
+
+En het resultaat is dan:
+
+![image](https://github.com/user-attachments/assets/55ca9ff0-de0f-4daf-a206-c04242f2572d)
+
+En een stukje bewijs dat het werkt:
+
+![image](https://github.com/user-attachments/assets/54ffe413-1f54-4947-8891-2de69a919413)
+
+![image](https://github.com/user-attachments/assets/4a6ceb84-417a-437a-9348-20767186384c)
+
+
+Bij categories is het het zelfde, maar dan alleen op naam.
+
+Daarnaast heb ik ook authenticatie in gebouwd. Als je als user op dashboard terecht komt kan je de crud links niet zien, als admin wel.
+
+![image](https://github.com/user-attachments/assets/275af599-2cea-49a4-afa8-03e054828f9a)
+Dit is als admin
+
+![image](https://github.com/user-attachments/assets/38a960b5-b6f3-41ed-9e65-0fe16f3dd2f9)
+
+Dit is als user.
+![image](https://github.com/user-attachments/assets/97971076-047f-4840-ac1b-a57ee3b9cea7)
+
+En de code.
+
+Dat was al weer alles voor vandaag, morgen ga ik verder met de laatste puntjes zodat ik zondag gerust de puntjes op de i kan zetten.

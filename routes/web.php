@@ -9,9 +9,8 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-Route::get('/trails', function () {
-    return view('trails');
-})->name("trails");
+
+Route::get('/trails', [HikingTrailController::class, 'trailIndex'])->name('trails.index');
 
 Route::get('/about', function () {
     return view('about_us');
@@ -41,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::patch('/categories/{category}/toggle', [CategoryController::class, 'toggleStatus'])->name('categories.toggleStatus');
 });
 
 

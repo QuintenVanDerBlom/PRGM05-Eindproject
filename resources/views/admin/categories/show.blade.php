@@ -33,25 +33,39 @@
                 <th scope="col" class="px-6 py-3">Name</th>
                 <th scope="col" class="px-6 py-3"><span class="sr-only">Edit</span></th>
                 <th scope="col" class="px-6 py-3"><span class="sr-only">Delete</span></th>
+                <th scope="col" class="px-6 py-3"><span class="sr-only">Status</span></th>
             </tr>
             </thead>
             <tbody>
             @foreach($categories as $category)
-                <tr class="bg-white border-b hover:bg-gray-50">
+                <tr class="bg-white border-b hover:bg-gray-50 {{ !$category->is_active ? 'opacity-50' : '' }}">
                     <td class="px-6 py-4">{{ $category->name }}</td>
+                    @if($category->is_active)
+                        <td class="px-6 py-4 text-right">
+                            <a href="{{ route('categories.edit', $category->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-medium text-red-600 hover:underline">Delete</button>
+                            </form>
+                        </td>
+                    @else
+                        <td colspan="2" class="px-6 py-4 text-gray-500 italic text-center">Disabled</td>
+                    @endif
                     <td class="px-6 py-4 text-right">
-                        <a href="{{ route('categories.edit', $category->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <!-- Delete form -->
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('categories.toggleStatus', $category->id) }}" method="POST" style="display: inline;">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit" class="font-medium text-red-600 hover:underline">Delete</button>
+                            @method('PATCH')
+                            <button type="submit" class="font-medium {{ $category->is_active ? 'text-gray-600' : 'text-green-600' }} hover:underline">
+                                {{ $category->is_active ? 'Disable' : 'Enable' }}
+                            </button>
                         </form>
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
     </div>

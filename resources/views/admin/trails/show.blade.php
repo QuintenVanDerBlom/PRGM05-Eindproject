@@ -1,5 +1,5 @@
 <x-layout title="Solice">
-@include('partials.navigation')
+    @include('partials.navigation')
     <section class="m-2">
         <form action="{{ route('trails.show') }}" method="GET" class="flex gap-2">
             <!-- Search Input -->
@@ -8,15 +8,13 @@
                 name="search"
                 value="{{ request('search') }}"
                 placeholder="Search trails..."
-                class="text-sm px-4 py-2 border rounded-lg focus:outline-none"
-            />
+                class="text-sm px-4 py-2 border rounded-lg focus:outline-none"/>
 
-            <!-- Category Dropdown -->
+            <!-- Dropdown -->
             <select
                 name="category"
                 class="text-sm px-4 py-2 border rounded-lg focus:outline-none"
-                onchange="this.form.submit()"
-            >
+                onchange="this.form.submit()">
                 <option value="">All Categories</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}"
@@ -37,6 +35,7 @@
             <a href="{{ route('trails.create') }}" class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">Create New Entry</a>
         </form>
     </section>
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -52,38 +51,44 @@
             </thead>
             <tbody>
             @foreach($trails as $trail)
-                <tr class="bg-white border-b hover:bg-gray-50">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $trail->location  }}</th>
-                    <td class="px-6 py-4">{{ $trail->type_trail  }}</td>
-                    <td class="px-6 py-4">{{ $trail->difficulty  }}</td>
-                    <td class="px-6 py-4">{{ $trail->name  }}</td>
+                <!-- Check if any associated category is inactive -->
+                @php
+                    $isInactive = $trail->categories->contains(fn($category) => !$category->is_active);
+                @endphp
+                <tr class="border-b hover:bg-gray-50 {{ $isInactive ? 'bg-gray-200 text-gray-500' : 'bg-white' }}">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $trail->location }}</th>
+                    <td class="px-6 py-4">{{ $trail->type_trail }}</td>
+                    <td class="px-6 py-4">{{ $trail->difficulty }}</td>
+                    <td class="px-6 py-4">{{ $trail->name }}</td>
                     <td class="px-6 py-4">
-                        <!-- Loop through the categories and display their names -->
+                        <!-- Loop through categories and display their names -->
                         @foreach($trail->categories as $category)
-                            <span class="bg-blue-500 text-white rounded px-2 py-1">{{ $category->name }}</span>
+                            <span class="rounded px-2 py-1 {{ $category->is_active ? 'bg-blue-500 text-white' : 'bg-gray-400 text-gray-700' }}">
+                                {{ $category->name }}
+                            </span>
                         @endforeach
                     </td>
-                    <td class="px-6 py-4 text-right"><a href="{{ route('trails.edit', $trail->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a></td>
                     <td class="px-6 py-4 text-right">
-                        <!-- Delete form -->
+                        <!-- Edit button, disabled if any associated category is inactive -->
+                        <a href="{{ route('trails.edit', $trail->id) }}" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:underline' }}" {{ $isInactive ? 'onclick="return false;"' : '' }}>
+                            Edit
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <!-- Delete button, disabled if any associated category is inactive -->
                         <form action="{{ route('trails.destroy', $trail->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="font-medium text-red-600 hover:underline">Delete</button>
+                            <button type="submit" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-red-600 hover:underline' }}" {{ $isInactive ? 'disabled' : '' }}>
+                                Delete
+                            </button>
                         </form>
                     </td>
                 </tr>
             @endforeach
-
             </tbody>
         </table>
     </div>
 
     @include('partials.footer')
 </x-layout>
-
-<script>
-    document.querySelector('select[name="category"]').addEventListener('change', function() {
-        this.form.submit();
-    });
-</script>

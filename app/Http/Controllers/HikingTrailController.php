@@ -12,7 +12,6 @@ class HikingTrailController extends Controller
     public function index(Request $request) {
         $query = HikingTrail::with('categories');
 
-        // Search functionality
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%')
@@ -20,7 +19,7 @@ class HikingTrailController extends Controller
             });
         }
 
-        // Filter by category
+        // Filter met category
         if ($request->has('category') && $request->category) {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('categories.id', $request->category); // Specificeer de tabel anders error.
@@ -31,6 +30,32 @@ class HikingTrailController extends Controller
         $categories = Category::all(); // Voor de dropdown search
 
         return view('admin.trails.show', [
+            'trails' => $trails,
+            'categories' => $categories
+        ]);
+    }
+
+    public function trailIndex(Request $request) {
+        $query = HikingTrail::with('categories');
+
+        if ($request->has('search') && $request->search) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('location', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter met category
+        if ($request->has('category') && $request->category) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('categories.id', $request->category); // Specificeer de tabel anders error.
+            });
+        }
+
+        $trails = $query->get();
+        $categories = Category::all(); // Voor de dropdown search
+
+        return view('trails', [
             'trails' => $trails,
             'categories' => $categories
         ]);

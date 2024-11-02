@@ -41,36 +41,39 @@ class CategoryController extends Controller
         // Redirect to the index page or show a success message
         return redirect()->route('categories.show')->with('success', 'Category created successfully!');
     }
-
-    // Show the form to edit the specified hiking trail
     public function edit(Category $category)
     {
-
-        // Pass the trail, all categories, and the selected categories to the view
+        if ($category->is_disabled) {
+            return redirect()->route('categories.show')->with('error', 'This category is disabled and cannot be edited.');
+        }
         return view('admin.categories.edit', compact('category'));
     }
 
-    // Update the specified category in the database
     public function update(Request $request, Category $category)
     {
-        // Validate the input
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        // Update the hiking trail
-        $category->update($validated);
-        // Redirect back or show success message
-        return redirect()->route('categories.show')->with('success', 'Category updated successfully!');
+        if ($category->is_disabled) {
+            return redirect()->route('categories.show')->with('error', 'This category is disabled and cannot be updated.');
+        }
+        // Proceed with update logic...
     }
 
     public function destroy($id)
     {
-        // Find the hiking trail by ID and delete it
-        $trail = Category::findOrFail($id);
-        $trail->delete();
-
-        // Redirect back with a success message
+        $category = Category::findOrFail($id);
+        if ($category->is_disabled) {
+            return redirect()->route('categories.show')->with('error', 'This category is disabled and cannot be deleted.');
+        }
+        $category->delete();
         return redirect()->route('categories.show')->with('success', 'Category deleted successfully!');
     }
+
+
+    public function toggleStatus(Category $category)
+    {
+        $category->is_active = !$category->is_active;
+        $category->save();
+
+        return redirect()->route('categories.show')->with('success', 'Category status updated successfully!');
+    }
+
 }

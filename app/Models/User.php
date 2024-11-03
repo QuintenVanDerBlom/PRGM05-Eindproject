@@ -46,4 +46,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hikingTrails()
+    {
+        return $this->hasMany(HikingTrail::class);
+    }
+
+    public function hasMinimumTrailCount($count = 5)
+    {
+        return $this->hikingTrails()->count() >= $count;
+    }
+
 }

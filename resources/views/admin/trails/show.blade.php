@@ -51,9 +51,9 @@
             </thead>
             <tbody>
             @foreach($trails as $trail)
-                <!-- Check if any associated category is inactive -->
                 @php
                     $isInactive = $trail->categories->contains(fn($category) => !$category->is_active);
+                    $isCreator = auth()->id() === $trail->created_by;
                 @endphp
                 <tr class="border-b hover:bg-gray-50 {{ $isInactive ? 'bg-gray-200 text-gray-500' : 'bg-white' }}">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $trail->location }}</th>
@@ -61,28 +61,33 @@
                     <td class="px-6 py-4">{{ $trail->difficulty }}</td>
                     <td class="px-6 py-4">{{ $trail->name }}</td>
                     <td class="px-6 py-4">
-                        <!-- Loop through categories and display their names -->
                         @foreach($trail->categories as $category)
                             <span class="rounded px-2 py-1 {{ $category->is_active ? 'bg-blue-500 text-white' : 'bg-gray-400 text-gray-700' }}">
-                                {{ $category->name }}
-                            </span>
+                                    {{ $category->name }}
+                                </span>
                         @endforeach
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <!-- Edit button, disabled if any associated category is inactive -->
-                        <a href="{{ route('trails.edit', $trail->id) }}" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:underline' }}" {{ $isInactive ? 'onclick="return false;"' : '' }}>
-                            Edit
-                        </a>
+                        @if($isCreator)
+                            <a href="{{ route('trails.edit', $trail->id) }}" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:underline' }}" {{ $isInactive ? 'onclick="return false;"' : '' }}>
+                                Edit
+                            </a>
+                        @else
+                            <span class="text-gray-400">Edit</span>
+                        @endif
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <!-- Delete button, disabled if any associated category is inactive -->
-                        <form action="{{ route('trails.destroy', $trail->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-red-600 hover:underline' }}" {{ $isInactive ? 'disabled' : '' }}>
-                                Delete
-                            </button>
-                        </form>
+                        @if($isCreator)
+                            <form action="{{ route('trails.destroy', $trail->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-medium {{ $isInactive ? 'text-gray-400 cursor-not-allowed' : 'text-red-600 hover:underline' }}" {{ $isInactive ? 'disabled' : '' }}>
+                                    Delete
+                                </button>
+                            </form>
+                        @else
+                            <span class="text-gray-400">Delete</span>
+                        @endif
                     </td>
                 </tr>
             @endforeach

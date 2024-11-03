@@ -50,4 +50,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use App\Http\Controllers\UserController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.show');
+    Route::get('/users/{user}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
+    Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
+});
+
+
+
 require __DIR__.'/auth.php';

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class HikingTrail extends Model
 {
     // Define the fillable fields
-    protected $fillable = ['name', 'location', 'type_trail', 'difficulty'];
+    protected $fillable = ['name', 'location', 'type_trail', 'difficulty', 'created_by',];
 
     public function categories()
     {

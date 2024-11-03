@@ -14,7 +14,7 @@
                 <label for="name" class="block text-gray-700 font-medium">Trail Name</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $hikingTrail->name) }}" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('name')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -23,7 +23,7 @@
                 <label for="location" class="block text-gray-700 font-medium">Location</label>
                 <input type="text" id="location" name="location" value="{{ old('location', $hikingTrail->location) }}" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('location')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -32,7 +32,7 @@
                 <label for="difficulty" class="block text-gray-700 font-medium">Difficulty (1 to 5)</label>
                 <input type="number" id="difficulty" name="difficulty" value="{{ old('difficulty', $hikingTrail->difficulty) }}" required min="1" max="5" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('difficulty')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -41,7 +41,7 @@
                 <label for="type_trail" class="block text-gray-700 font-medium">Type of Trail</label>
                 <input type="text" id="type_trail" name="type_trail" value="{{ old('type_trail', $hikingTrail->type_trail) }}" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('type_trail')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -57,7 +57,7 @@
                     @endforeach
                 </select>
                 @error('categories')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 

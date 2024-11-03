@@ -63,10 +63,7 @@ class HikingTrailController extends Controller
 
     public function create()
     {
-        // Fetch all categories
         $categories = Category::all();
-
-        // Pass the categories to the view
         return view('admin.trails.create', compact('categories'));
     }
 
@@ -80,19 +77,19 @@ class HikingTrailController extends Controller
             'categories' => 'required|array',
         ]);
 
-        $validated['created_by'] = auth()->id(); // Save creator's ID
+        $validated['created_by'] = auth()->id(); // Ensure auth() is returning a valid user ID
 
         $trail = HikingTrail::create($validated);
+
         $trail->categories()->attach($request->categories);
 
         return redirect()->route('trails.show')->with('success', 'Hiking trail created successfully!');
     }
 
 
-    // Show the form to edit the specified hiking trail
+
     public function edit(HikingTrail $hikingTrail)
     {
-        // Check if the logged-in user is the creator
         if (auth()->id() !== $hikingTrail->created_by) {
             abort(403, 'Unauthorized action.');
         }
@@ -126,7 +123,6 @@ class HikingTrailController extends Controller
 
     public function destroy($id)
     {
-        // Find the hiking trail by ID and delete it
         $trail = HikingTrail::findOrFail($id);
         $trail->delete();
 

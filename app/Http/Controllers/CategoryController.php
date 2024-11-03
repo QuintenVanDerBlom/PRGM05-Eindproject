@@ -25,20 +25,17 @@ class CategoryController extends Controller
 
     public function create()
     {
-        // Pass the categories to the view
         return view('admin.categories.create');
     }
 
     public function store(Request $request)
     {
-        // Validate the input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
         $category = Category::create($validated);
 
-        // Redirect to the index page or show a success message
         return redirect()->route('categories.show')->with('success', 'Category created successfully!');
     }
     public function edit(Category $category)
@@ -54,8 +51,15 @@ class CategoryController extends Controller
         if ($category->is_disabled) {
             return redirect()->route('categories.show')->with('error', 'This category is disabled and cannot be updated.');
         }
-        // Proceed with update logic...
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+        ]);
+
+        $category->update($validatedData);
+        return redirect()->route('categories.show')->with('success', 'Category updated successfully!');
     }
+
 
     public function destroy($id)
     {

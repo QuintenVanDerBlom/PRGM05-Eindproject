@@ -177,3 +177,28 @@ En de code in de controllers:
 ![image](https://github.com/user-attachments/assets/859fefde-716f-402c-b8c4-601828e55dcd)
 
 Dat was em al weer. Ik rond morgen de rest af en lever het project in.
+
+## 3 November Zondag
+
+Laatste dag al weer en ik heb mijn project afgerond. Ik heb diepere validatie toegevoegd en nog wat checks of alles er wel in zat.
+
+Als eerste de diepere validatie. Ik heb dit gedaan gebaseerd op hoeveel Hiking Trails de admin heeft gemaakt. Als het er minder dan 5 zijn kan hij niet bij de users om die te beheren.
+![image](https://github.com/user-attachments/assets/e02a27b2-49e4-41be-9dcd-393f09f0cbf4)
+
+En als de code:
+![image](https://github.com/user-attachments/assets/0a9cba04-3899-4639-b884-459edc23b8d6)
+
+![image](https://github.com/user-attachments/assets/07d546aa-0976-41d2-9141-e2cd8cb10e5e)
+
+Ik heb hier alleen eloquent voor gebruikt zoals aangewezen.
+
+Ik heb ook nog toegevoegd dat andere admins niet de trails kunnen aanpassen die gemaakt zien door een andere admin:
+
+![image](https://github.com/user-attachments/assets/28eb88a2-5210-4a00-8a30-ca83dbafcc88)
+
+
+En dit is de code
+![image](https://github.com/user-attachments/assets/402b3e9d-3313-4528-ac2f-6866ccd34882)
+
+
+Verder werkt de site en heb ik alle eisen. Ik ga nu mijn code uploaden naar Brightspace.
